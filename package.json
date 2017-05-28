@@ -1,24 +1,26 @@
 {
-    "name": "smarth",
-    "version": "1.0.0",
-    "description": "Ingineer license project",
-    "main": "server.js",
-    "dependencies": {
-        "oled-font-5x7": "^1.0.0",
-        "oled-js": "^4.0.2",
-        "express": "*",
-        "socket.io": "*"
-    },
-    "devDependencies": {},
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
-        "start": "node server.js"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://andreirat@bitbucket.org/andreirat/homeautomation.git"
-    },
-    "author": "Rat Andrei",
-    "license": "ISC",
-    "homepage": "https://bitbucket.org/andreirat/homeautomation#readme"
+  "name": "smarth",
+  "version": "1.0.0",
+  "description": "Ingineer license project",
+  "main": "server.js",
+  "dependencies": {
+    "express": "*",
+    "oled-font-5x7": "^1.0.0",
+    "oled-js": "^4.0.2",
+    "pigpio": "^0.6.0",
+    "raspi-io": "^8.0.1",
+    "socket.io": "*"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://andreirat@bitbucket.org/andreirat/homeautomation.git"
+  },
+  "author": "Rat Andrei",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/andreirat/homeautomation#readme"
 }
