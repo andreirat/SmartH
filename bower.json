@@ -1,0 +1,25 @@
+{
+  "name": "SmartH",
+  "description": "Ingineer license project",
+  "main": "server.js",
+  "authors": [
+    "Rat Andrei"
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "angularjs#^1.5.8",
+    "components-font-awesome": "^4.7.0",
+    "angular-socket-io": "^0.7.0",
+    "socket.io-client": "^1.5.0",
+    "font-awesome": "^4.7.0"
+  }
+}
