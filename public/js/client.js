@@ -95,6 +95,9 @@ var app = angular.module('myApp', ['btford.socket-io'])
         console.log('motionend', data);
     });
 
+    mySocket.on("userData", function(data) {
+        console.log(data);
+    });
     $scope.setLevelText = function() {
         var redPercentage = Math.round((($scope.redcolor / 255) * 100), 2);
         var greenPercentage = Math.round((($scope.greencolor / 255) * 100), 2);

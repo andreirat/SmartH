@@ -41,11 +41,7 @@ Date.prototype.timeNow = function() {
 
 // Variable init
 var leds = {};
-// var opts = {
-//     width: 128,
-//     height: 64,
-//     address: 0x3D
-// };
+
 
 
 // When board is ready ...
@@ -53,39 +49,34 @@ board.on("ready", function() {
 
     var collection = db.get('usercollection');
     collection.find({}, {}, function(e, docs) {
-        console.log(docs);
+        io.emit('userData', docs);
     });
 
     leds = new five.Leds(["P1-13", "P1-15"]);
-    // var motion = new five.Motion("GPIO23");
+    var motion = new five.Motion("GPIO23");
 
-    // // "calibrated" occurs once, at the beginning of a session,
-    // motion.on("calibrated", function(data) {
-    //     console.log("Calibrated");
-    // });
+    // "calibrated" occurs once, at the beginning of a session,
+    motion.on("calibrated", function(data) {
+        console.log("Calibrated");
+    });
 
-    // // "motionstart" events are fired when the "calibrated"
-    // // proximal area is disrupted, generally by some form of movement
-    // motion.on("motionstart", function() {
-    //     var date = new Date();
-    //     io.emit('motionstart', date);
-    //     console.log("motionstart");
-    //     var time = date.today() + " @ " + date.timeNow();
-    //     sendSMS(time);
-    // });
+    // "motionstart" events are fired when the "calibrated"
+    // proximal area is disrupted, generally by some form of movement
+    motion.on("motionstart", function() {
+        var date = new Date();
+        io.emit('motionstart', date);
+        console.log("motionstart");
+        var time = date.today() + " @ " + date.timeNow();
+        // sendSMS(time);
+    });
 
-    // // "motionend" events are fired following a "motionstart" event
-    // // when no movement has occurred in X ms
-    // motion.on("motionend", function() {
-    //     var date = new Date;
-    //     io.emit('motionend', date);
-    //     console.log("motionend");
-    // });
-
-    // var oled = new oled(opts);
-    // oled.turnOnDisplay();
-    // oled.setCursor(1, 1);
-    // oled.writeString(font, 1, 'Salut', 1, true);
+    // "motionend" events are fired following a "motionstart" event
+    // when no movement has occurred in X ms
+    motion.on("motionend", function() {
+        var date = new Date;
+        io.emit('motionend', date);
+        console.log("motionend");
+    });
 
 });
 
@@ -131,13 +122,3 @@ function sendSMS(time) {
         }
     );
 }
-
-// Oled functions
-
-/*
- **  Function to clear display
- */
-// function clearDisplay() {
-//     oled.clearDisplay(true);
-//     oled.update();
-// }
