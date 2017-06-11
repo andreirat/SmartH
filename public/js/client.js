@@ -17,6 +17,7 @@ var app = angular.module('myApp', ['btford.socket-io'])
         { number: 1, led: 2, status: false, color: 'green', location: 'Living' }
     ];
 
+
     $scope.lcdtext = '';
     //On page load , set motion divs status to false
     $scope.motion = false;
@@ -60,21 +61,15 @@ var app = angular.module('myApp', ['btford.socket-io'])
         $scope.joystickDirectionY = axis.y;
     });
 
+    // For the time now
+    Date.prototype.timeNow = function() {
+        return ((this.getHours() < 10) ? "0" : "") + this.getHours() + ":" + ((this.getMinutes() < 10) ? "0" : "") + this.getMinutes() + ":" + ((this.getSeconds() < 10) ? "0" : "") + this.getSeconds();
+    }
+
     mySocket.on('motionstart', function(data) {
         $scope.motion = true;
         var date = new Date(data);
-        var h = date.getHours();
-        var m = date.getMinutes();
-        var s = date.getSeconds();
-        if (h < 9) {
-            h = '0' + h;
-        } else if (m < 9) {
-            m = '0' + m;
-        } else if (s < 9) {
-            s = '0' + s;
-        }
-        $scope.motionstart = h + ':' + m + ':' + s;
-
+        $scope.motionstart = date.timeNow();
         console.log('motionstart', h + ':' + m + ':' + s);
     });
     mySocket.on('motionend', function(data) {
@@ -179,11 +174,8 @@ var app = angular.module('myApp', ['btford.socket-io'])
             }
         },
         series: [{
-            name: 'John',
+            name: 'Miscare',
             data: [3, 4, 3, 5, 4, 10, 12]
-        }, {
-            name: 'Jane',
-            data: [1, 3, 4, 3, 3, 5, 4]
         }]
     });
 
