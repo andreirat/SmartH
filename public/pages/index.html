@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en" ng-app="myApp">
+
 <head>
     <meta charset="utf-8" />
     <link rel="icon" type="image/png" href="../img/favicon.ico">
@@ -9,15 +10,16 @@
     <meta name="viewport" content="width=device-width" />
 
     <link href="../css/bootstrap.min.css" rel="stylesheet" />
-    <link href="../css/animate.min.css" rel="stylesheet"/>
-    <link href="../css/light-bootstrap-dashboard.css" rel="stylesheet"/>
+    <link href="../css/animate.min.css" rel="stylesheet" />
+    <link href="../css/light-bootstrap-dashboard.css" rel="stylesheet" />
 
     <link rel="stylesheet" href="../css/style.css" type="text/css">
     <link rel="stylesheet" href="../css/iconic_fill.css" type="text/css">
     <link href="../css/dashboard.css" rel="stylesheet" />
-
-    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-    <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="../../bower_components/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../fonts/roboto.css">
+    <!--<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">-->
+    <!--<link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>-->
     <link href="../css/pe-icon-7-stroke.css" rel="stylesheet" />
 
     <script src="../lib/jquery/dist/jquery.min.js"></script>
@@ -26,166 +28,159 @@
     <script src="../lib/angular-socket-io/socket.js"></script>
     <script src="../js/client.js"></script>
 </head>
+
 <body ng-controller="ArduController" ng-init="setOff();">
 
-<div class="wrapper">
+    <div class="wrapper">
 
-    <div class="sidebar" data-color="purple" data-image="img/sidebar-5.jpg">
-        <div class="sidebar-wrapper">
-            <div class="logo">
-                <a href="http://andreirat.bitbucket.org" class="simple-text">
+        <div class="sidebar" data-color="purple" data-image="img/sidebar-5.jpg">
+            <div class="sidebar-wrapper">
+                <div class="logo">
+                    <a href="http://andreirat.bitbucket.org" class="simple-text">
                     Rat Andrei
                     <img src="" alt="">
                 </a>
+                </div>
+                <ul class="nav">
+                    <li class="active">
+                        <a data-toggle="tab" href="#home">
+                            <i class="pe-7s-home"></i>
+                            <p>Home</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a data-toggle="tab" href="#lights">
+                            <i class="pe-7s-light"></i>
+                            <p>Lights</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a data-toggle="tab" href="#security">
+                            <i class="pe-7s-shield"></i>
+                            <p>Security</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a data-toggle="tab" href="#energy">
+                            <i class="pe-7s-plug"></i>
+                            <p>Energy</p>
+                        </a>
+                    </li>
+                </ul>
             </div>
-            <ul class="nav">
-                <li class="active">
-                    <a data-toggle="tab" href="#home">
-                        <i class="pe-7s-home"></i>
-                        <p>Home</p>
-                    </a>
-                </li>
-                <li>
-                    <a data-toggle="tab" href="#lights">
-                        <i class="pe-7s-light"></i>
-                        <p>Lights</p>
-                    </a>
-                </li>
-                <li>
-                    <a data-toggle="tab" href="#security">
-                        <i class="pe-7s-shield"></i>
-                        <p>Security</p>
-                    </a>
-                </li>
-                <li>
-                    <a data-toggle="tab" href="#energy">
-                        <i class="pe-7s-plug"></i>
-                        <p>Energy</p>
-                    </a>
-                </li>
-            </ul>
         </div>
-    </div>
 
-    <div class="main-panel">
-        <nav class="navbar navbar-default navbar-fixed">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-example-2">
+        <div class="main-panel">
+            <nav class="navbar navbar-default navbar-fixed">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-example-2">
                         <span class="sr-only">Toggle navigation</span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                </div>
-                <div class="collapse navbar-collapse">
-                    <ul class="nav navbar-nav navbar-right">
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <i class="fa fa-globe"></i>
-                                <b class="caret"></b>
-                                <span class="notification">5</span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">Notification 1</a></li>
-                                <li><a href="#">Notification 2</a></li>
-                                <li><a href="#">Notification 3</a></li>
-                                <li><a href="#">Notification 4</a></li>
-                                <li><a href="#">Another notification</a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="#">
+                    </div>
+                    <div class="collapse navbar-collapse">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <i class="fa fa-globe"></i>
+                                    <b class="caret"></b>
+                                    <span class="notification">5</span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">Notification 1</a></li>
+                                    <li><a href="#">Notification 2</a></li>
+                                    <li><a href="#">Notification 3</a></li>
+                                    <li><a href="#">Notification 4</a></li>
+                                    <li><a href="#">Another notification</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#">
                                 Log in
                             </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-
-        <div class="container-fluid">
-            <div class="tab-content">
-                <div id="home" class="tab-pane fade in active">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            <h5>Lights</h5>
-                        </div>
-                        <div class="panel-body">
-                            <div style="margin-top: 20px;" class="col-lg-6 col-md-6 col-xs-6 " ng-repeat="pin in ledPins">
-                                <div><i class="fa fa-lightbulb-o fa-4x"  ng-click="ledOn(pin);" ng-show="pin.status==false"></i><span>{{led.number}}</span></div>
-                                <i class="fa fa-lightbulb-o fa-4x" style="color:{{pin.color}};" ng-click="ledOff(pin)" ng-hide="pin.status==false"></i>
-                            </div>
-                        </div>
+                            </li>
+                        </ul>
                     </div>
-                    <div class="container">
+                </div>
+            </nav>
+
+            <div class="container-fluid">
+                <div class="tab-content">
+                    <div id="home" class="tab-pane fade in active">
+
+
+                    </div>
+                    <div id="lights" class="tab-pane fade">
                         <div class="panel panel-primary">
                             <div class="panel-heading">
-                                <h5>Joystick</h5>
+                                <h5>Lights</h5>
                             </div>
                             <div class="panel-body">
-                              X:  {{joystickDirectionX}}
-                              Y:  {{joystickDirectionY}}
+                                <div style="margin-top: 20px;" class="col-lg-6 col-md-6 col-xs-6 " ng-repeat="pin in ledPins">
+                                    <div><i class="fa fa-lightbulb-o fa-4x" ng-click="ledOn(pin);" ng-show="pin.status==false"></i><span>{{led.number}}</span></div>
+                                    <i class="fa fa-lightbulb-o fa-4x" style="color:{{pin.color}};" ng-click="ledOff(pin)" ng-hide="pin.status==false"></i>
+                                </div>
+                            </div>
+                        </div>
 
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h5>Ambiental lights</h5>
                             </div>
-                        </div>
-                    </div>
-                </div>
-                <div id="lights" class="tab-pane fade">
-                    <div class="panel panel-info">
-                        <div class="panel-heading">
-                            <h5>Ambiental lights</h5>
-                        </div>
-                        <div class="panel-body">
-                            <div style="margin-top: 20px;" class="col-lg-4 col-md-4 col-xs-6">
-                                <p>Red <small id="redPercentage"></small></p>
-                                <input type="range" id="red" name="range" ng-model="redcolor" min="1" ng-change="setLevelText()"  max="255">
-                            </div>
-                            <div style="margin-top: 20px;" class="col-lg-4 col-md-4 col-xs-6">
-                                <p>Green <small id="greenPercentage"></small></p>
-                                <input type="range" id="green" name="range" ng-model="greencolor" min="1" ng-change="setLevelText()"  max="255">
-                            </div>
+                            <div class="panel-body">
+                                <div style="margin-top: 20px;" class="col-lg-4 col-md-4 col-xs-6">
+                                    <p>Red <small id="redPercentage"></small></p>
+                                    <input type="range" id="red" name="range" ng-model="redcolor" min="1" ng-change="setLevelText()" max="255">
+                                </div>
+                                <div style="margin-top: 20px;" class="col-lg-4 col-md-4 col-xs-6">
+                                    <p>Green <small id="greenPercentage"></small></p>
+                                    <input type="range" id="green" name="range" ng-model="greencolor" min="1" ng-change="setLevelText()" max="255">
+                                </div>
 
-                            <div style="margin-top: 20px;" class="col-lg-4 col-md-4 col-xs-6">
-                                <p>Blue <small id="bluePercentage"></small></p>
-                                <input type="range" id="blue" name="range" ng-model="bluecolor" min="1" ng-change="setLevelText()"  max="255">
+                                <div style="margin-top: 20px;" class="col-lg-4 col-md-4 col-xs-6">
+                                    <p>Blue <small id="bluePercentage"></small></p>
+                                    <input type="range" id="blue" name="range" ng-model="bluecolor" min="1" ng-change="setLevelText()" max="255">
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div id="security" class="tab-pane fade">
-                    <div class="panel panel-success">
-                        <div class="panel-heading">
-                            <h5>Activity status</h5>
-                        </div>
-                        <div class="panel-body">
-                            <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12" ng-show="motion">
-                                <p>Last recorded activity:</p>
-                                <!--<p class="motionstart"><i class="glyphicon glyphicon-eye-open"></i></p>-->
-                                <input type="datetime" ng-model="motionstart" readonly>
+                    <div id="security" class="tab-pane fade">
+                        <div class="panel panel-success">
+                            <div class="panel-heading">
+                                <h5>Activity status</h5>
                             </div>
-                            <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12" ng-show="nomotion">
-                                <p>No activity since:</p>
-                                <!--<p class="motionstart"><i class="glyphicon glyphicon-eye-close"></i></p>-->
-                                <input type="datetime" ng-model="motionend" readonly>
+                            <div class="panel-body">
+                                <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12" ng-show="motion">
+                                    <p>Last recorded activity:</p>
+                                    <!--<p class="motionstart"><i class="glyphicon glyphicon-eye-open"></i></p>-->
+                                    <input type="datetime" ng-model="motionstart" readonly>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12" ng-show="nomotion">
+                                    <p>No activity since:</p>
+                                    <!--<p class="motionstart"><i class="glyphicon glyphicon-eye-close"></i></p>-->
+                                    <input type="datetime" ng-model="motionend" readonly>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    <div id="energy" class="tab-pane fade">
+                        <h4>Oled Draw</h4>
+                        <input type="text" ng-model="lcdtext">
+                        <br/>
+                        <button id="clear" ng-click="clearText();">Clear Text</button>
+                        <button id="invert" ng-click="pushText();">Push text</button>
+                    </div>
                 </div>
-                <div id="energy" class="tab-pane fade">
-                    <h4>Oled Draw</h4>
-                    <input type="text" ng-model="lcdtext">
-                    <br/>
-                    <button id="clear" ng-click="clearText();">Clear Text</button>
-                    <button id="invert" ng-click="pushText();">Push text</button>
-                </div>
+
             </div>
-
         </div>
     </div>
-</div>
 </body>
 <script src="../js/jquery-1.10.2.js" type="text/javascript"></script>
 <script src="../lib/bootstrap/bootstrap.min.js" type="text/javascript"></script>
 <script src="../lib/bootstrap/light-bootstrap-dashboard.js"></script>
+
 </html>

@@ -20,6 +20,6 @@
     "components-font-awesome": "^4.7.0",
     "angular-socket-io": "^0.7.0",
     "socket.io-client": "^1.5.0",
-    "font-awesome": "^4.7.0"
+    "font-awesome": "fontawesome#^4.7.0"
   }
 }
