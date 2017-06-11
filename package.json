@@ -8,6 +8,7 @@
     "nexmo": "^2.0.2",
     "oled-font-5x7": "^1.0.0",
     "oled-js": "^4.0.2",
+    "oled-js-pi": "^1.0.5",
     "pigpio": "^0.6.0",
     "raspi-io": "^8.0.1",
     "socket.io": "*"
