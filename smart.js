@@ -47,10 +47,6 @@ var leds = {};
 // When board is ready ...
 board.on("ready", function() {
 
-    var collection = db.get('usercollection');
-    collection.find({}, {}, function(e, docs) {
-        io.emit('userData', docs);
-    });
 
     leds = new five.Leds(["P1-13", "P1-15"]);
     var motion = new five.Motion("GPIO23");
@@ -83,6 +79,10 @@ board.on("ready", function() {
 io.on('connection', function(socket) {
     console.log('Started');
 
+    var collection = db.get('usercollection');
+    collection.find({}, {}, function(e, docs) {
+        socket.emit('userData', docs);
+    });
 
     // Led ON action
     socket.on('led:on', function(data) {

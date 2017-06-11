@@ -97,6 +97,7 @@ var app = angular.module('myApp', ['btford.socket-io'])
 
     mySocket.on("userData", function(data) {
         console.log(data);
+        $scope.user = data[0];
     });
     $scope.setLevelText = function() {
         var redPercentage = Math.round((($scope.redcolor / 255) * 100), 2);
