@@ -5,6 +5,7 @@
   "main": "server.js",
   "dependencies": {
     "express": "*",
+    "nexmo": "^2.0.2",
     "oled-font-5x7": "^1.0.0",
     "oled-js": "^4.0.2",
     "pigpio": "^0.6.0",
