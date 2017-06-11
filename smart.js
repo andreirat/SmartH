@@ -6,13 +6,19 @@ var httpServer = require("http").createServer(app);
 var five = require("johnny-five");
 var Raspi = require("raspi-io");
 var io = require('socket.io')(httpServer);
-var oled = require('oled-js-pi');
-var font = require('oled-font-5x7');
+var mongo = require('mongodb');
+var monk = require('monk');
+var db = monk('localhost:27017/smarth');
+// var oled = require('oled-js-pi');
+// var font = require('oled-font-5x7');
 var board = new five.Board({
     io: new Raspi()
 });
 var port = 3000;
-
+app.use(function(req, res, next) {
+    req.db = db;
+    next();
+});
 app.use(express.static(__dirname + '/public'));
 app.get('/', function(req, res) {
     res.sendFile(__dirname + '/public/pages/index.html');
@@ -34,15 +40,21 @@ Date.prototype.timeNow = function() {
 
 // Variable init
 var leds = {};
-var opts = {
-    width: 128,
-    height: 64,
-    address: 0x3D
-};
+// var opts = {
+//     width: 128,
+//     height: 64,
+//     address: 0x3D
+// };
 
 
 // When board is ready ...
 board.on("ready", function() {
+
+    var db = req.db;
+    var collection = db.get('usercollection');
+    collection.find({}, {}, function(e, docs) {
+        console.log(docs);
+    });
 
     leds = new five.Leds(["P1-13", "P1-15"]);
     // var motion = new five.Motion("GPIO23");
@@ -70,10 +82,10 @@ board.on("ready", function() {
     //     console.log("motionend");
     // });
 
-    var oled = new oled(opts);
-    oled.turnOnDisplay();
-    oled.setCursor(1, 1);
-    oled.writeString(font, 1, 'Salut', 1, true);
+    // var oled = new oled(opts);
+    // oled.turnOnDisplay();
+    // oled.setCursor(1, 1);
+    // oled.writeString(font, 1, 'Salut', 1, true);
 
 });
 
@@ -125,7 +137,7 @@ function sendSMS(time) {
 /*
  **  Function to clear display
  */
-function clearDisplay() {
-    oled.clearDisplay(true);
-    oled.update();
-}
+// function clearDisplay() {
+//     oled.clearDisplay(true);
+//     oled.update();
+// }
