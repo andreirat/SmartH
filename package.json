@@ -4,9 +4,15 @@
     "description": "Ingineer license project",
     "main": "server.js",
     "dependencies": {
+        "express": "*",
+        "mongodb": "^2.2.28",
+        "nexmo": "^2.0.2",
         "oled-font-5x7": "^1.0.0",
         "oled-js": "^4.0.2",
-        "express": "*",
+        "oled-js-pi": "^1.0.5",
+        "pigpio": "^0.6.0",
+        "monk": "^4.0.0",
+        "raspi-io": "^8.0.1",
         "socket.io": "*"
     },
     "devDependencies": {},
