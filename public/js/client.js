@@ -102,6 +102,10 @@ var app = angular.module('myApp', ['btford.socket-io'])
         mySocket.emit('alarm', $scope.alarm);
     };
 
+    $scope.setAutoLights = function() {
+
+    }
+
     mySocket.on("userData", function(data) {
         console.log(data);
         $scope.user = data[0];

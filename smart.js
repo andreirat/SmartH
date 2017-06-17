@@ -42,27 +42,38 @@ Date.prototype.timeNow = function() {
 // Variable init
 var leds = {};
 var motion = {};
+var piezo;
 
 // When board is ready ...
 board.on("ready", function() {
-
+    piezo = new five.Piezo("GPIO18");
     leds = new five.Leds(["P1-13", "P1-15", "P1-11"]);
     motion = new five.Motion("GPIO23");
 
+    // Plays the same song with a string representation
+    piezo.play({
+        // song is composed by a string of notes
+        // a default beat is set, and the default octave is used
+        // any invalid note is read as "no note"
+        song: "C D F D A - A A A A G G G G - - C D F D G - G G G G F F F F - -",
+        beats: 1 / 4,
+        tempo: 100
+    });
+
     // "calibrated" occurs once, at the beginning of a session,
     motion.on("calibrated", function(data) {
-        console.log("Calibrated");
+        console.log("Motion sensor calibrated.");
     });
 
     // "motionstart" events are fired when the "calibrated"
     // proximal area is disrupted, generally by some form of movement
-    // motion.on("motionstart", function() {
-    //     var date = new Date();
-    //     io.emit('motionstart', date);
-    //     console.log("motionstart");
-    //     var time = date.today() + " @ " + date.timeNow();
-    //     // sendSMS(time);
-    // });
+    motion.on("motionstart", function() {
+        var date = new Date();
+        io.emit('motionstart', date);
+        console.log("motionstart");
+        var time = date.today() + " @ " + date.timeNow();
+        // sendSMS(time);
+    });
 
     // "motionend" events are fired following a "motionstart" event
     // when no movement has occurred in X ms
