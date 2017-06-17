@@ -98,6 +98,10 @@ io.on('connection', function(socket) {
 
     });
 
+    socket.on('alarm', function(data) {
+        console.log(data);
+    });
+
 });
 
 // SMS function 

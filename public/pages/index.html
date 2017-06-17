@@ -152,6 +152,8 @@
                         </div>
                     </div>
                     <div id="security" class="tab-pane fade">
+                        <button type="button" ng-click="activateAlarm();" ng-show="!alarm">Activeaza Alarma</button>
+                        <button type="button" ng-click="activateAlarm();" ng-hide="alarm">Dezactiveaza Alarma</button>
                         <div class="panel panel-success">
                             <div class="panel-heading">
                                 <h5>Activity status</h5>

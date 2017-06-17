@@ -90,6 +90,11 @@ var app = angular.module('myApp', ['btford.socket-io'])
         chart1.series[0].setData($scope.valuesArray);
         chart1.xAxis[0].setCategories($scope.hourArray);
     });
+    $scope.alarm = false;
+    $scope.activateAlarm = function() {
+        $scope.alarm = !$scope.alarm;
+        mySocket.emit('alarm', $scope.alarm);
+    }
 
     mySocket.on("userData", function(data) {
         console.log(data);
