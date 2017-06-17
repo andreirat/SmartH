@@ -41,15 +41,13 @@ Date.prototype.timeNow = function() {
 
 // Variable init
 var leds = {};
-
-
+var motion = {};
 
 // When board is ready ...
 board.on("ready", function() {
 
-
-    leds = new five.Leds(["P1-13", "P1-15"]);
-    var motion = new five.Motion("GPIO23");
+    leds = new five.Leds(["P1-13", "P1-15", "P1-11"]);
+    motion = new five.Motion("GPIO23");
 
     // "calibrated" occurs once, at the beginning of a session,
     motion.on("calibrated", function(data) {
@@ -58,13 +56,13 @@ board.on("ready", function() {
 
     // "motionstart" events are fired when the "calibrated"
     // proximal area is disrupted, generally by some form of movement
-    motion.on("motionstart", function() {
-        var date = new Date();
-        io.emit('motionstart', date);
-        console.log("motionstart");
-        var time = date.today() + " @ " + date.timeNow();
-        // sendSMS(time);
-    });
+    // motion.on("motionstart", function() {
+    //     var date = new Date();
+    //     io.emit('motionstart', date);
+    //     console.log("motionstart");
+    //     var time = date.today() + " @ " + date.timeNow();
+    //     // sendSMS(time);
+    // });
 
     // "motionend" events are fired following a "motionstart" event
     // when no movement has occurred in X ms
@@ -99,7 +97,16 @@ io.on('connection', function(socket) {
     });
 
     socket.on('alarm', function(data) {
-        console.log(data);
+        if (data) {
+            motion.on("motionstart", function() {
+                var date = new Date();
+                io.emit('motionstart', date);
+                console.log("motionstart here");
+                var time = date.today() + " @ " + date.timeNow();
+                leds[2].blink(300);
+                // sendSMS(time);
+            });
+        }
     });
 
 });

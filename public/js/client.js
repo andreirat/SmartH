@@ -92,9 +92,15 @@ var app = angular.module('myApp', ['btford.socket-io'])
     });
     $scope.alarm = false;
     $scope.activateAlarm = function() {
-        $scope.alarm = !$scope.alarm;
+        $scope.alarm = true;
         mySocket.emit('alarm', $scope.alarm);
     }
+
+    $scope.deactivateAlarm = function() {
+        $scope.alarm = false;
+        console.log($scope.alarm);
+        mySocket.emit('alarm', $scope.alarm);
+    };
 
     mySocket.on("userData", function(data) {
         console.log(data);
