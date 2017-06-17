@@ -10,7 +10,7 @@ var app = angular.module('myApp', ['btford.socket-io'])
         console.log('login');
     })
 
-.controller('ArduController', function($scope, mySocket) {
+.controller('ArduController', function($scope, mySocket, $timeout) {
     //Led array
     $scope.ledPins = [
         { number: 0, led: 1, status: false, color: 'red', location: 'Bucatarie' },
@@ -65,30 +65,36 @@ var app = angular.module('myApp', ['btford.socket-io'])
     Date.prototype.timeNow = function() {
         return ((this.getHours() < 10) ? "0" : "") + this.getHours() + ":" + ((this.getMinutes() < 10) ? "0" : "") + this.getMinutes() + ":" + ((this.getSeconds() < 10) ? "0" : "") + this.getSeconds();
     }
-
+    $scope.hourArray = [];
+    $scope.valuesArray = [];
     mySocket.on('motionstart', function(data) {
         $scope.motion = true;
         var date = new Date(data);
+        $scope.valuesArray.push(1);
+        $scope.hourArray.push(date.timeNow());
+        console.log($scope.valuesArray);
+        console.log($scope.hourArray);
+        chart1.series[0].setData($scope.valuesArray);
+        chart1.xAxis[0].setCategories($scope.hourArray);
+        // $timeout(function() {
+        // angular.element("#container").highcharts().reflow();
+        // }, 1);
         $scope.motionstart = date.timeNow();
-        console.log('motionstart', h + ':' + m + ':' + s);
     });
     mySocket.on('motionend', function(data) {
         $scope.nomotion = true;
         var date = new Date(data);
-        var h = date.getHours();
-        var m = date.getMinutes();
-        var s = date.getSeconds();
-        if (h < 9) {
-            h = '0' + h;
-        } else if (m < 9) {
-            m = '0' + m;
-        } else if (s < 9) {
-            s = '0' + s;
-        }
-        $scope.motionend = h + ':' + m + ':' + s;
-
-        console.log('motionend', data);
+        $scope.valuesArray.push(0);
+        $scope.hourArray.push(date.timeNow());
+        $scope.motionend = date.timeNow();
+        chart1.series[0].setData($scope.valuesArray);
+        chart1.xAxis[0].setCategories($scope.hourArray);
     });
+    $scope.alarm = false;
+    $scope.activateAlarm = function() {
+        $scope.alarm = !$scope.alarm;
+        mySocket.emit('alarm', $scope.alarm);
+    }
 
     mySocket.on("userData", function(data) {
         console.log(data);
@@ -123,12 +129,15 @@ var app = angular.module('myApp', ['btford.socket-io'])
         mySocket.emit('clearText');
     };
 
-    var chart = Highcharts.chart('container', {
+    var options = {
         chart: {
-            type: 'areaspline'
+            type: 'areaspline',
+            events: {
+                load: function() {}
+            }
         },
         title: {
-            text: 'Average fruit consumption during one week'
+            text: 'Motion detector activity '
         },
         legend: {
             layout: 'vertical',
@@ -138,45 +147,31 @@ var app = angular.module('myApp', ['btford.socket-io'])
             y: 100,
             floating: true,
             borderWidth: 1,
-            backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
-        },
-        xAxis: {
-            categories: [
-                'Monday',
-                'Tuesday',
-                'Wednesday',
-                'Thursday',
-                'Friday',
-                'Saturday',
-                'Sunday'
-            ],
-            plotBands: [{ // visualize the weekend
-                from: 4.5,
-                to: 6.5,
-                color: 'rgba(68, 170, 213, .2)'
-            }]
+            backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#ccc'
         },
         yAxis: {
             title: {
-                text: 'Fruit units'
+                text: 'Power W'
             }
         },
         tooltip: {
             shared: true,
-            valueSuffix: ' units'
+            valueSuffix: ' motion'
         },
         credits: {
-            enabled: false
+            enabled: true
         },
         plotOptions: {
             areaspline: {
                 fillOpacity: 0.5
-            }
+            },
+            showInNavigator: true
         },
         series: [{
-            name: 'Miscare',
-            data: [3, 4, 3, 5, 4, 10, 12]
+            name: "Miscare",
+            color: '#fdfe02'
         }]
-    });
+    };
+    var chart1 = new Highcharts.Chart('container', options);
 
 });
