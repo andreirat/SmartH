@@ -147,7 +147,7 @@ var app = angular.module('myApp', ['btford.socket-io'])
             }
         },
         title: {
-            text: 'Motion detector activity '
+            text: 'Activitatea senzorului de miscare'
         },
         legend: {
             layout: 'vertical',

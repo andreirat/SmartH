@@ -47,25 +47,25 @@
                     <li class="active">
                         <a data-toggle="tab" href="#home">
                             <i class="pe-7s-home"></i>
-                            <p>Home</p>
+                            <p>Genral</p>
                         </a>
                     </li>
                     <li>
                         <a data-toggle="tab" href="#lights">
                             <i class="pe-7s-light"></i>
-                            <p>Lights</p>
+                            <p>Lumini</p>
                         </a>
                     </li>
                     <li>
                         <a data-toggle="tab" href="#security">
                             <i class="pe-7s-shield"></i>
-                            <p>Security</p>
+                            <p>Securitate</p>
                         </a>
                     </li>
                     <li>
                         <a data-toggle="tab" href="#energy">
                             <i class="pe-7s-plug"></i>
-                            <p>Energy</p>
+                            <p>Energie</p>
                         </a>
                     </li>
                 </ul>
@@ -116,8 +116,8 @@
                             <div class="col-md-6">
                                 <div class="card ">
                                     <div class="header">
-                                        <h4 class="title">Tasks</h4>
-                                        <p class="category">Backend development</p>
+                                        <h4 class="title">Alarma</h4>
+                                        <p class="category">Activeaza sau dezactiveaza alarma</p>
                                     </div>
                                     <div class="content">
                                         <button type="button" ng-click="activateAlarm();" ng-show="alarm==false">Activeaza Alarma</button>
@@ -129,8 +129,8 @@
                             <div class="col-md-6">
                                 <div class="card ">
                                     <div class="header">
-                                        <h4 class="title">Tasks</h4>
-                                        <p class="category">Backend development</p>
+                                        <h4 class="title">Programare</h4>
+                                        <p class="category"></p>
                                     </div>
                                     <div class="content">
                                         <div class="table-full-width">
@@ -143,6 +143,14 @@
                                                     </label>
                                                         </td>
                                                         <td>Limini exterioare automate</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <label class="checkbox">
+                                                        <input type="checkbox" ng-click="setAutoLights();" value="" data-toggle="checkbox">
+                                                    </label>
+                                                        </td>
+                                                        <td>Alarma automata</td>
                                                     </tr>
                                                 </tbody>
                                             </table>
@@ -170,7 +178,7 @@
 
                         <div class="panel panel-info">
                             <div class="panel-heading">
-                                <h5>Ambiental lights</h5>
+                                <h5>Lumina ambientala</h5>
                             </div>
                             <div class="panel-body">
                                 <div style="margin-top: 20px;" class="col-lg-4 col-md-4 col-xs-6">
@@ -193,16 +201,16 @@
 
                         <div class="panel panel-success">
                             <div class="panel-heading">
-                                <h5>Activity status</h5>
+                                <h5>Status activitate</h5>
                             </div>
                             <div class="panel-body">
                                 <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12" ng-show="motion">
-                                    <p>Last recorded activity:</p>
+                                    <p>Ultima miscare detectata:</p>
                                     <!--<p class="motionstart"><i class="glyphicon glyphicon-eye-open"></i></p>-->
                                     <input type="datetime" ng-model="motionstart" readonly>
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12" ng-show="nomotion">
-                                    <p>No activity since:</p>
+                                    <p>Nu a detectat miscare de la :</p>
                                     <!--<p class="motionstart"><i class="glyphicon glyphicon-eye-close"></i></p>-->
                                     <input type="datetime" ng-model="motionend" readonly>
                                 </div>
