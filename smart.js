@@ -13,6 +13,8 @@ var database;
 var mongo = require('mongodb');
 var monk = require('monk');
 var db = monk('localhost:27017/smarth');
+var weather = require('./weatherlib');
+
 
 // var oled = require('oled-js-pi');
 // var font = require('oled-font-5x7');
@@ -46,6 +48,9 @@ var piezo;
 
 // When board is ready ...
 board.on("ready", function() {
+
+    console.log(weather.forecastWeather("cluj", 7, errorHandler));
+
     piezo = new five.Piezo("GPIO18");
     leds = new five.Leds(["P1-13", "P1-15", "P1-11", "GPIO20", "GPIO21"]);
     motion = new five.Motion("GPIO23");
