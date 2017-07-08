@@ -100,8 +100,8 @@ io.on('connection', function(socket) {
         socket.emit('userData', docs);
     });
 
-    var weather = weather.forecastWeather("cluj", 7, errorHandler);
-    socket.emit("weather", weather);
+    var w = weather.forecastWeather("cluj", 7, errorHandler);
+    socket.emit("weather", w);
 
     // Led ON action
     socket.on('led:on', function(data) {

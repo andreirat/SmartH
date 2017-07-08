@@ -4,6 +4,7 @@
     <list default="true" id="8fdb110f-79d4-49dd-8fd1-9d3398ae2ad9" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/client.js" afterPath="$PROJECT_DIR$/public/js/client.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/smart.js" afterPath="$PROJECT_DIR$/smart.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/weatherlib.js" afterPath="$PROJECT_DIR$/weatherlib.js" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -18,28 +19,28 @@
       <file leaf-file-name="smart.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/smart.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="536">
-              <caret line="103" column="24" lean-forward="false" selection-start-line="103" selection-start-column="17" selection-end-line="103" selection-end-column="24" />
+            <state relative-caret-position="353">
+              <caret line="89" column="33" lean-forward="true" selection-start-line="89" selection-start-column="33" selection-end-line="89" selection-end-column="33" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="weatherlib.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="weatherlib.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/weatherlib.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="495">
-              <caret line="33" column="69" lean-forward="true" selection-start-line="33" selection-start-column="69" selection-end-line="33" selection-end-column="70" />
+            <state relative-caret-position="105">
+              <caret line="7" column="23" lean-forward="false" selection-start-line="7" selection-start-column="23" selection-end-line="7" selection-end-column="23" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="client.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="client.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/js/client.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="430">
-              <caret line="82" column="26" lean-forward="true" selection-start-line="82" selection-start-column="26" selection-end-line="82" selection-end-column="26" />
+            <state relative-caret-position="450">
+              <caret line="76" column="6" lean-forward="false" selection-start-line="76" selection-start-column="6" selection-end-line="76" selection-end-column="6" />
               <folding />
             </state>
           </provider>
@@ -64,8 +65,8 @@
       <file leaf-file-name="weather_client.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/weather_client.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15">
-              <caret line="1" column="0" lean-forward="true" selection-start-line="1" selection-start-column="0" selection-end-line="3" selection-end-column="2" />
+            <state relative-caret-position="135">
+              <caret line="9" column="17" lean-forward="false" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
               <folding />
             </state>
           </provider>
@@ -82,9 +83,9 @@
         <option value="$PROJECT_DIR$/public/css/light-bootstrap-dashboard.css" />
         <option value="$PROJECT_DIR$/public/pages/index.html" />
         <option value="$PROJECT_DIR$/weather_client.js" />
-        <option value="$PROJECT_DIR$/weatherlib.js" />
-        <option value="$PROJECT_DIR$/smart.js" />
         <option value="$PROJECT_DIR$/public/js/client.js" />
+        <option value="$PROJECT_DIR$/smart.js" />
+        <option value="$PROJECT_DIR$/weatherlib.js" />
       </list>
     </option>
   </component>
@@ -234,12 +235,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1499550365854</updated>
-      <workItem from="1499550368301" duration="2979000" />
+      <workItem from="1499550368301" duration="3396000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="2979000" />
+    <option name="totallyTimeSpent" value="3396000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -302,22 +303,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/weatherlib.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="495">
-          <caret line="33" column="69" lean-forward="true" selection-start-line="33" selection-start-column="69" selection-end-line="33" selection-end-column="70" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/weather_client.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" column="0" lean-forward="true" selection-start-line="1" selection-start-column="0" selection-end-line="3" selection-end-column="2" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/pages/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
@@ -332,18 +317,34 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/smart.js">
+    <entry file="file://$PROJECT_DIR$/public/js/client.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="536">
-          <caret line="103" column="24" lean-forward="false" selection-start-line="103" selection-start-column="17" selection-end-line="103" selection-end-column="24" />
+        <state relative-caret-position="450">
+          <caret line="76" column="6" lean-forward="false" selection-start-line="76" selection-start-column="6" selection-end-line="76" selection-end-column="6" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/client.js">
+    <entry file="file://$PROJECT_DIR$/smart.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="430">
-          <caret line="82" column="26" lean-forward="true" selection-start-line="82" selection-start-column="26" selection-end-line="82" selection-end-column="26" />
+        <state relative-caret-position="353">
+          <caret line="89" column="33" lean-forward="true" selection-start-line="89" selection-start-column="33" selection-end-line="89" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/weather_client.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="17" lean-forward="false" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/weatherlib.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="23" lean-forward="false" selection-start-line="7" selection-start-column="23" selection-end-line="7" selection-end-column="23" />
           <folding />
         </state>
       </provider>
