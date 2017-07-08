@@ -46,13 +46,13 @@ var leds = {};
 var motion = {};
 var piezo;
 
+errorHandler = function (){
+    console.log('got some error')
+};
 // When board is ready ...
 board.on("ready", function() {
 
-    console.log(weather.forecastWeather("cluj", 7, errorHandler));
-    errorHandler = function (){
-        console.log('got some error')
-    };
+
     piezo = new five.Piezo("GPIO18");
     leds = new five.Leds(["P1-13", "P1-15", "P1-11", "GPIO20", "GPIO21"]);
     motion = new five.Motion("GPIO23");
@@ -99,6 +99,9 @@ io.on('connection', function(socket) {
     collection.find({}, {}, function(e, docs) {
         socket.emit('userData', docs);
     });
+
+    var weather = weather.forecastWeather("cluj", 7, errorHandler);
+    socket.emit("weather", weather);
 
     // Led ON action
     socket.on('led:on', function(data) {

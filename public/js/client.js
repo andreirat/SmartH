@@ -71,6 +71,11 @@ var app = angular.module('myApp', ['btford.socket-io'])
         $scope.joystickDirectionY = axis.y;
     });
 
+    mySocket.on('weather', function(data) {
+        $scope.weather = data;
+        console.log(data);
+    };
+
     // For the time now
     Date.prototype.timeNow = function() {
         return ((this.getHours() < 10) ? "0" : "") + this.getHours() + ":" + ((this.getMinutes() < 10) ? "0" : "") + this.getMinutes() + ":" + ((this.getSeconds() < 10) ? "0" : "") + this.getSeconds();
