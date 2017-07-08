@@ -101,6 +101,7 @@ io.on('connection', function(socket) {
     });
 
     var w = weather.forecastWeather("cluj", 7, errorHandler);
+    console.log(w);
     socket.emit("weather", w);
 
     // Led ON action
