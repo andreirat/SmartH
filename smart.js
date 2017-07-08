@@ -6,15 +6,16 @@ var httpServer = require("http").createServer(app);
 var five = require("johnny-five");
 var Raspi = require("raspi-io");
 var io = require('socket.io')(httpServer);
+// var monk = require('monk');
+// var db = monk('localhost:27017/smarth');
 var database;
 // Retrieve
 var mongo = require('mongodb');
 var monk = require('monk');
-
-// Connect to database
 var db = monk('localhost:27017/smarth');
 
-
+// var oled = require('oled-js-pi');
+// var font = require('oled-font-5x7');
 var board = new five.Board({
     io: new Raspi()
 });
@@ -30,29 +31,38 @@ console.log('Hello Rat ! Server is runing on port ' + port);
 // For todays date;
 Date.prototype.today = function() {
     return ((this.getDate() < 10) ? "0" : "") + this.getDate() + "/" + (((this.getMonth() + 1) < 10) ? "0" : "") + (this.getMonth() + 1) + "/" + this.getFullYear();
-};
+}
 
 // For the time now
 Date.prototype.timeNow = function() {
     return ((this.getHours() < 10) ? "0" : "") + this.getHours() + ":" + ((this.getMinutes() < 10) ? "0" : "") + this.getMinutes() + ":" + ((this.getSeconds() < 10) ? "0" : "") + this.getSeconds();
-};
+}
 
 
 // Variable init
 var leds = {};
-
-
+var motion = {};
+var piezo;
 
 // When board is ready ...
 board.on("ready", function() {
+    piezo = new five.Piezo("GPIO18");
+    leds = new five.Leds(["P1-13", "P1-15", "P1-11", "GPIO20", "GPIO21"]);
+    motion = new five.Motion("GPIO23");
 
-
-    leds = new five.Leds(["P1-13", "P1-15", "GPIO20","GPIO21"]);
-    var motion = new five.Motion("GPIO23");
+    // Plays the same song with a string representation
+    piezo.play({
+        // song is composed by a string of notes
+        // a default beat is set, and the default octave is used
+        // any invalid note is read as "no note"
+        song: "C D F D A - A A A A G G G G - - C D F D G - G G G G F F F F - -",
+        beats: 1 / 4,
+        tempo: 100
+    });
 
     // "calibrated" occurs once, at the beginning of a session,
     motion.on("calibrated", function(data) {
-        console.log("Calibrated");
+        console.log("Motion sensor calibrated.");
     });
 
     // "motionstart" events are fired when the "calibrated"
@@ -89,25 +99,35 @@ io.on('connection', function(socket) {
         leds[data.number].on();
         console.log('Led ' + data.number + ' on');
     });
-    // Aprinde lumini exterioare
-    socket.on('outdoor:on', function(data) {
-        leds[2].on();
-        leds[3].on();
-        console.log('Outdoor lights on');
-    });
-
-    // Aprinde lumini exterioare
-    socket.on('outdoor:off', function(data) {
-        leds[2].off();
-        leds[3].off();
-        console.log('Outdoor lights off');
-    });
 
     // Led OFF action
     socket.on('led:off', function(data) {
         leds[data.number].off();
         console.log('Led ' + data.number + ' off');
 
+    });
+    // Led OFF action
+    socket.on('outdoor:off', function(data) {
+        leds[3].off();
+        leds[4].off();
+    });
+    // Led OFF action
+    socket.on('outdoor:on', function(data) {
+        leds[3].on();
+        leds[4].on();
+    });
+
+    socket.on('alarm', function(data) {
+        if (data) {
+            motion.on("motionstart", function() {
+                var date = new Date();
+                io.emit('motionstart', date);
+                console.log("motionstart here");
+                var time = date.today() + " @ " + date.timeNow();
+                leds[2].blink(300);
+                // sendSMS(time);
+            });
+        }
     });
 
 });
@@ -120,7 +140,7 @@ const nexmo = new Nexmo({
 });
 
 function sendSMS(time) {
-    var msg = 'Salut Andrei! Miscare detectata in ' + time + ' !';
+    // let msg = 'Salut Andrei! Miscare detectata in ' + time + ' !';
     // nexmo.message.sendSms(
     //     config.nexmo.fromNumber,
     //     config.nexmo.toNumber,
