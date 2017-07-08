@@ -132,21 +132,12 @@
 
                         <div class="panel panel-info">
                             <div class="panel-heading">
-                                <h5>Ambiental lights</h5>
+                                <h5>Lumini exterioare</h5>
                             </div>
                             <div class="panel-body">
-                                <div style="margin-top: 20px;" class="col-lg-4 col-md-4 col-xs-6">
-                                    <p>Red <small id="redPercentage"></small></p>
-                                    <input type="range" id="red" name="range" ng-model="redcolor" min="1" ng-change="setLevelText()" max="255">
-                                </div>
-                                <div style="margin-top: 20px;" class="col-lg-4 col-md-4 col-xs-6">
-                                    <p>Green <small id="greenPercentage"></small></p>
-                                    <input type="range" id="green" name="range" ng-model="greencolor" min="1" ng-change="setLevelText()" max="255">
-                                </div>
-
-                                <div style="margin-top: 20px;" class="col-lg-4 col-md-4 col-xs-6">
-                                    <p>Blue <small id="bluePercentage"></small></p>
-                                    <input type="range" id="blue" name="range" ng-model="bluecolor" min="1" ng-change="setLevelText()" max="255">
+                                <div style="margin-top: 20px;">
+                                    <div><i class="fa fa-lightbulb-o fa-4x" ng-click="OutdoorOn()" ng-show="outdoor==false"></i><span>On</span></div>
+                                    <div><i class="fa fa-lightbulb-o fa-4x" ng-click="OutdoorOff()" ng-show="outdoor==true"></i><span>Off</span></div>
                                 </div>
                             </div>
                         </div>

@@ -6,16 +6,15 @@ var httpServer = require("http").createServer(app);
 var five = require("johnny-five");
 var Raspi = require("raspi-io");
 var io = require('socket.io')(httpServer);
-// var monk = require('monk');
-// var db = monk('localhost:27017/smarth');
 var database;
 // Retrieve
 var mongo = require('mongodb');
 var monk = require('monk');
+
+// Connect to database
 var db = monk('localhost:27017/smarth');
 
-// var oled = require('oled-js-pi');
-// var font = require('oled-font-5x7');
+
 var board = new five.Board({
     io: new Raspi()
 });
@@ -31,12 +30,12 @@ console.log('Hello Rat ! Server is runing on port ' + port);
 // For todays date;
 Date.prototype.today = function() {
     return ((this.getDate() < 10) ? "0" : "") + this.getDate() + "/" + (((this.getMonth() + 1) < 10) ? "0" : "") + (this.getMonth() + 1) + "/" + this.getFullYear();
-}
+};
 
 // For the time now
 Date.prototype.timeNow = function() {
     return ((this.getHours() < 10) ? "0" : "") + this.getHours() + ":" + ((this.getMinutes() < 10) ? "0" : "") + this.getMinutes() + ":" + ((this.getSeconds() < 10) ? "0" : "") + this.getSeconds();
-}
+};
 
 
 // Variable init
@@ -48,7 +47,7 @@ var leds = {};
 board.on("ready", function() {
 
 
-    leds = new five.Leds(["P1-13", "P1-15"]);
+    leds = new five.Leds(["P1-13", "P1-15", "GPIO20","GPIO21"]);
     var motion = new five.Motion("GPIO23");
 
     // "calibrated" occurs once, at the beginning of a session,
@@ -90,6 +89,19 @@ io.on('connection', function(socket) {
         leds[data.number].on();
         console.log('Led ' + data.number + ' on');
     });
+    // Aprinde lumini exterioare
+    socket.on('outdoor:on', function(data) {
+        leds[2].on();
+        leds[3].on();
+        console.log('Outdoor lights on');
+    });
+
+    // Aprinde lumini exterioare
+    socket.on('outdoor:off', function(data) {
+        leds[2].off();
+        leds[3].off();
+        console.log('Outdoor lights off');
+    });
 
     // Led OFF action
     socket.on('led:off', function(data) {
@@ -108,17 +120,17 @@ const nexmo = new Nexmo({
 });
 
 function sendSMS(time) {
-    let msg = 'Salut Andrei! Miscare detectata in ' + time + ' !';
-    nexmo.message.sendSms(
-        config.nexmo.fromNumber,
-        config.nexmo.toNumber,
-        msg, { type: 'unicode' },
-        (err, responseData) => {
-            if (err) {
-                console.log(err);
-            } else {
-                console.dir(responseData);
-            }
-        }
-    );
+    var msg = 'Salut Andrei! Miscare detectata in ' + time + ' !';
+    // nexmo.message.sendSms(
+    //     config.nexmo.fromNumber,
+    //     config.nexmo.toNumber,
+    //     msg, { type: 'unicode' },
+    //     (err, responseData) => {
+    //         if (err) {
+    //             console.log(err);
+    //         } else {
+    //             console.dir(responseData);
+    //         }
+    //     }
+    // );
 }

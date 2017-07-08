@@ -56,6 +56,16 @@ var app = angular.module('myApp', ['btford.socket-io'])
         console.log('Led ' + p.number + ' is off');
     };
 
+    $scope.outdoor = false;
+    $scope.OutdoorOn = function() {
+        $scope.outdoor = true;
+        mySocket.emit('outdoor:on', "on");
+    };
+    $scope.OutdoorOff = function() {
+        $scope.outdoor = false;
+        mySocket.emit('outdoor:off', "off");
+    };
+
     mySocket.on('joystick', function(axis) {
         $scope.joystickDirectionX = axis.x;
         $scope.joystickDirectionY = axis.y;
@@ -64,7 +74,7 @@ var app = angular.module('myApp', ['btford.socket-io'])
     // For the time now
     Date.prototype.timeNow = function() {
         return ((this.getHours() < 10) ? "0" : "") + this.getHours() + ":" + ((this.getMinutes() < 10) ? "0" : "") + this.getMinutes() + ":" + ((this.getSeconds() < 10) ? "0" : "") + this.getSeconds();
-    }
+    };
     $scope.hourArray = [];
     $scope.valuesArray = [];
     mySocket.on('motionstart', function(data) {
