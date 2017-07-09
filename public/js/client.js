@@ -72,6 +72,7 @@ var app = angular.module('myApp', ['btford.socket-io'])
     });
 
     mySocket.on('weather', function(data) {
+        console.log(data);
         $scope.weather = data;
         $scope.current = data.current;
         $scope.currentLocation = data.location;
