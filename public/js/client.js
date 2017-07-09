@@ -133,12 +133,12 @@ var app = angular.module('myApp', ['btford.socket-io'])
     $scope.alarm = false;
     $scope.activateAlarm = function() {
         $scope.alarm = true;
-        mySocket.emit('alarm', $scope.alarm);
+        mySocket.emit('alarm:on', $scope.alarm);
     }
 
     $scope.deactivateAlarm = function() {
         $scope.alarm = false;
-        mySocket.emit('alarm', $scope.alarm);
+        mySocket.emit('alarm:off', $scope.alarm);
     };
 
     $scope.setAutoLights = function() {
