@@ -27,7 +27,7 @@ var app = angular.module('myApp', ['btford.socket-io'])
 
     function forecastWeather(query, noOfDays, callback, success){
         options.path = '/v1/forecast.json?key=' + apiKey + '&q=' + query + '&days=' + noOfDays;
-        $http.get('api.apixu.com', options).then(success, error());
+        $http.get('http://api.apixu.com', options).then(success, error());
 
     }
 
