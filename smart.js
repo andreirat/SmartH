@@ -100,7 +100,11 @@ io.on('connection', function(socket) {
         socket.emit('userData', docs);
     });
 
-    var w = weather.forecastWeather("cluj", 7, errorHandler);
+
+    weather.forecastWeather("cluj", 7, errorHandler, success);
+    success = function (data){
+        console.log(data)
+    };
     console.log(w);
     socket.emit("weather", w);
 

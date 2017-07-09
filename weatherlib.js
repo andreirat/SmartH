@@ -31,12 +31,12 @@ exports.currentWeather = function currentWeather(query, callback){
 
 
 
-exports.forecastWeather = function forecastWeather(query, noOfDays, callback){
+exports.forecastWeather = function forecastWeather(query, noOfDays, callback, success){
 	options.path = '/v1/forecast.json?key=' + apiKey + '&q=' + query + '&days=' + noOfDays;
 	http.request(options, function(res) {
 	  res.setEncoding('utf8');
 	  res.on('data', function (chunk) {
-			return chunk;
+			success(chunk);
 	  });
 	  res.on('end', function (chunk) {
 	  });
