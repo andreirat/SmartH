@@ -69,6 +69,12 @@ board.on("ready", function() {
         tempo: 100
     });
 
+
+    success = function (data){
+        io.emit("weather", data);
+    };
+    weather.forecastWeather("cluj", 7, errorHandler, success);
+
     // "calibrated" occurs once, at the beginning of a session,
     motion.on("calibrated", function(data) {
         console.log("Motion sensor calibrated.");
@@ -101,10 +107,6 @@ io.on('connection', function(socket) {
     collection.find({}, {}, function(e, docs) {
         socket.emit('userData', docs);
     });
-    success = function (data){
-        socket.emit("weather", data);
-    };
-    weather.forecastWeather("cluj", 7, errorHandler, success);
 
     // Led ON action
     socket.on('led:on', function(data) {
