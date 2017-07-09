@@ -102,12 +102,9 @@ io.on('connection', function(socket) {
         socket.emit('userData', docs);
     });
     success = function (data){
-        console.log(data);
-        localweather = data;
+        socket.emit("weather", localweather);
     };
     weather.forecastWeather("cluj", 7, errorHandler, success);
-
-    socket.emit("weather", localweather);
 
     // Led ON action
     socket.on('led:on', function(data) {
