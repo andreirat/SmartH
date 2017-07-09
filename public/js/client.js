@@ -29,11 +29,24 @@ var app = angular.module('myApp', ['btford.socket-io'])
     smartService.getForecast(apiKey, "cluj", 7, function (response) {
         $scope.weather = response.data;
         $scope.current = response.data.current;
+        $cope.current.date = formatDate($scope.current.date);
         $scope.currentLocation = response.data.location;
         $scope.forecastday = response.data.forecast.forecastday;
     });
 
+    function formatDate(date){
+        var d = new Date(date);
+        var weekday = new Array(7);
+        weekday[0] =  "Duminica";
+        weekday[1] = "Luni";
+        weekday[2] = "Marti";
+        weekday[3] = "Miercuri";
+        weekday[4] = "Joi";
+        weekday[5] = "Vineri";
+        weekday[6] = "Sambata";
 
+       return weekday[d.getDay()];
+    }
 
 
     $scope.lcdtext = '';
