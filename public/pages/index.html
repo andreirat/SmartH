@@ -211,8 +211,8 @@
                                 </div>
                                 <div class="content">
                                     <div style="margin-top: 20px;">
-                                        <div><i class="fa fa-lightbulb-o fa-4x" ng-click="ledOn(pin);" ng-show="pin.status===false"></i><span>{{led.number}}</span></div>
-                                        <i class="fa fa-lightbulb-o fa-4x" style="color:green" ng-click="ledOff(pin)" ng-hide="pin.status===false"></i>
+                                        <div><i class="fa fa-lightbulb-o fa-4x" ng-click="ledOn(pin);" ng-hide="pin.status===true"></i><span>{{led.number}}</span></div>
+                                        <i class="fa fa-lightbulb-o fa-4x" style="color:green" ng-click="ledOff(pin)" ng-show="pin.status===true"></i>
                                     </div>
                                 </div>
                             </div>
