@@ -49,10 +49,7 @@ var localweather;
 errorHandler = function (){
     console.log('got some error')
 };
-success = function (data){
-    localweather = data;
-};
-var w = weather.forecastWeather("cluj", 7, errorHandler, success);
+
 
 // When board is ready ...
 board.on("ready", function() {
@@ -104,7 +101,10 @@ io.on('connection', function(socket) {
     collection.find({}, {}, function(e, docs) {
         socket.emit('userData', docs);
     });
-
+    success = function (data){
+        localweather = data;
+    };
+    weather.forecastWeather("cluj", 7, errorHandler, success);
 
     console.log(localweather+"aici");
     socket.emit("weather", localweather);
