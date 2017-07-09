@@ -45,16 +45,15 @@ Date.prototype.timeNow = function() {
 var leds = {};
 var motion = {};
 var piezo;
-
+var localweather;
 errorHandler = function (){
     console.log('got some error')
 };
 success = function (data){
-    console.log(data)
+    localweather = data;
 };
 var w = weather.forecastWeather("cluj", 7, errorHandler, success);
 
-console.log(w);
 // When board is ready ...
 board.on("ready", function() {
 
@@ -107,8 +106,8 @@ io.on('connection', function(socket) {
     });
 
 
-
-    socket.emit("weather", w);
+    console.log(localweather+"aici");
+    socket.emit("weather", localweather);
 
     // Led ON action
     socket.on('led:on', function(data) {
