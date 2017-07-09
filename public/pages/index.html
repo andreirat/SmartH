@@ -175,18 +175,18 @@
                                                     <tr>
                                                         <td>
                                                             <label class="checkbox">
-                                                        <input type="checkbox" ng-click="setAutoLights();" value="" data-toggle="checkbox">
+                                                        <input type="checkbox" ng-click="setTimeLights();" value="" data-toggle="checkbox">
                                                     </label>
                                                         </td>
-                                                        <td>Limini exterioare automate</td>
+                                                        <td>Porneste lumini exterioare la <input type="datetime-local" name="bdaytime" ng-model="datalumini"></td>
                                                     </tr>
                                                     <tr>
                                                         <td>
                                                             <label class="checkbox">
-                                                        <input type="checkbox" ng-click="setAutoLights();" value="" data-toggle="checkbox">
+                                                        <input type="checkbox" ng-click="setTimeAlarm();" value="" data-toggle="checkbox" >
                                                     </label>
                                                         </td>
-                                                        <td>Alarma automata</td>
+                                                        <td>Activare alarma la <input type="datetime-local" name="bdaytime" ng-model="dataalarma"></td>
                                                     </tr>
                                                 </tbody>
                                             </table>

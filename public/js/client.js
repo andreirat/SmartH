@@ -141,7 +141,13 @@ var app = angular.module('myApp', ['btford.socket-io'])
         mySocket.emit('alarm:off', $scope.alarm);
     };
 
-    $scope.setAutoLights = function() {
+    $scope.setTimeLights = function() {
+        console.log($scope.datalumini)
+
+    }
+    
+    $scope.setTimeAlarm = function() {
+        console.log($scope.dataalarma)
 
     }
 
