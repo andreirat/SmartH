@@ -45,6 +45,9 @@ var app = angular.module('myApp', ['btford.socket-io'])
     function success(data){
         console.log(data+"aici");
     }
+    function error(data){
+        console.log(data+"121");
+    }
     forecastWeather("cluj",7, error, success);
 
 
