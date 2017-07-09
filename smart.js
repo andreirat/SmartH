@@ -136,7 +136,7 @@ io.on('connection', function(socket) {
     socket.on('alarm:off', function(data) {
         if (!data) {
             console.log(data);
-            leds[2].blink(300);
+            leds[2].off();
         }
     });
 
