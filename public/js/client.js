@@ -11,6 +11,12 @@ var app = angular.module('myApp', ['btford.socket-io'])
 .controller('ArduController', function($scope, mySocket, $timeout, $http, smartService) {
 
 
+    //Led array
+    $scope.ledPins = [
+        { number: 0, led: 1, status: false, color: 'red', location: 'Bucatarie' },
+        { number: 1, led: 2, status: false, color: 'green', location: 'Living' }
+    ];
+
     var apiKey = '461eb1eda8b24280826233659170807';
     $scope.hourArray = [];
     $scope.valuesArray = [];
@@ -46,12 +52,6 @@ var app = angular.module('myApp', ['btford.socket-io'])
 
        return weekday[d.getDay()];
     }
-
-    //Led array
-    $scope.ledPins = [
-        { number: 0, led: 1, status: false, color: 'red', location: 'Bucatarie' },
-        { number: 1, led: 2, status: false, color: 'green', location: 'Living' }
-    ];
 
 
     //On page load , set motion divs status to false
