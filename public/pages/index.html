@@ -202,6 +202,9 @@
                     </div>
                     <div id="lights" class="tab-pane fade">
                         <div class="row">
+                            <div>
+                                <p class="page-header">Interior</p>
+                            </div>
                             <div class="card  col-lg-3" style="padding: 20px; margin:20px;" ng-repeat="pin in ledPins">
                                 <div class="header">
                                     <h4 class="title">{{pin.number==0?'Bucatarie':'Living'}}</h4>
@@ -214,15 +217,18 @@
                                 </div>
                             </div>
                         </div>
-
-                        <div class="panel panel-info">
-                            <div class="panel-heading">
-                                <h5>Lumini exterioare</h5>
+                        <div>
+                            <p class="page-header">Interior</p>
+                        </div>
+                        <div class="card  col-lg-3" style="padding: 20px; margin:20px;" ng-repeat="pin in ledPins">
+                            <div class="header">
+                                <h4 class="title">{{pin.number==0?'Bucatarie':'Living'}}</h4>
                             </div>
-                            <div class="panel-body">
-                                <div><i class="fa fa-lightbulb-o fa-4x" ng-click="OutdoorOn()" ng-show="outdoor==false"></i><span>On</span></div>
-                                <div><i class="fa fa-lightbulb-o fa-4x" ng-click="OutdoorOff()" ng-show="outdoor==true"></i><span>Off</span></div>
-
+                            <div class="content">
+                                <div style="margin-top: 20px;">
+                                    <div><i class="fa fa-lightbulb-o fa-4x" ng-click="OutdoorOn()" ng-show="outdoor==false"></i><span></span></div>
+                                    <i class="fa fa-lightbulb-o fa-4x" style="color:green;" ng-click="OutdoorOff()" ng-hide="outdoor==true"></i>
+                                </div>
                             </div>
                         </div>
                     </div>
