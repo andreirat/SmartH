@@ -145,7 +145,7 @@ var app = angular.module('myApp', ['btford.socket-io'])
         console.log($scope.datalumini)
 
     }
-    
+
     $scope.setTimeAlarm = function() {
         console.log($scope.dataalarma)
 
