@@ -202,11 +202,11 @@
                     </div>
                     <div id="lights" class="tab-pane fade">
                         <div class="row">
-                            <div class="panel panel-primary col-lg-4" style="margin: 10px; padding: 0;" ng-repeat="pin in ledPins">
-                                <div class="panel-heading">
-                                    <h5>{{pin.number==0?'Bucatarie':'Living'}}</h5>
+                            <div class="card " ng-repeat="pin in ledPins">>
+                                <div class="header">
+                                    <h4 class="title">{{pin.number==0?'Bucatarie':'Living'}}</h4>
                                 </div>
-                                <div class="panel-body">
+                                <div class="content">
                                     <div style="margin-top: 20px;">
                                         <div><i class="fa fa-lightbulb-o fa-4x" ng-click="ledOn(pin);" ng-show="pin.status==false"></i><span>{{led.number}}</span></div>
                                         <i class="fa fa-lightbulb-o fa-4x" style="color:{{pin.color}};" ng-click="ledOff(pin)" ng-hide="pin.status==false"></i>

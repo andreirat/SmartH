@@ -129,7 +129,7 @@ io.on('connection', function(socket) {
                 console.log("motionstart here");
                 var time = date.today() + " @ " + date.timeNow();
                 leds[2].blink(300);
-                // sendSMS(time);
+                sendSMS(time);
             });
         }
     });
@@ -144,17 +144,8 @@ const nexmo = new Nexmo({
 });
 
 function sendSMS(time) {
-    // let msg = 'Salut Andrei! Miscare detectata in ' + time + ' !';
-    // nexmo.message.sendSms(
-    //     config.nexmo.fromNumber,
-    //     config.nexmo.toNumber,
-    //     msg, { type: 'unicode' },
-    //     (err, responseData) => {
-    //         if (err) {
-    //             console.log(err);
-    //         } else {
-    //             console.dir(responseData);
-    //         }
-    //     }
-    // );
+    var msg = 'Alerta miscare!';
+    nexmo.message.sendSms(config.nexmo.fromNumber, config.nexmo.toNumber, msg, {type: 'unicode'}, function (response) {
+        console.log(response);
+    })
 }
