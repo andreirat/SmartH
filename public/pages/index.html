@@ -211,8 +211,8 @@
                                 </div>
                                 <div class="content">
                                     <div style="margin-top: 20px;">
-                                        <div><i class="fa fa-lightbulb-o fa-4x" ng-click="ledOn(pin);" ng-show="pin.status==false"></i><span>{{led.number}}</span></div>
-                                        <i class="fa fa-lightbulb-o fa-4x" style="color:green" ng-click="ledOff(pin)" ng-hide="pin.status==false"></i>
+                                        <div><i class="fa fa-lightbulb-o fa-4x" ng-click="ledOn(pin);" ng-show="pin.status===false"></i><span>{{led.number}}</span></div>
+                                        <i class="fa fa-lightbulb-o fa-4x" style="color:green" ng-click="ledOff(pin)" ng-hide="pin.status===false"></i>
                                     </div>
                                 </div>
                             </div>
@@ -221,7 +221,7 @@
                             <div>
                                 <p class="page-header" style="border-bottom: 13px solid #8765cb; font-size: 20px;">Exterior</p>
                             </div>
-                            <div class="card  col-lg-3" >
+                            <div class="card  col-lg-3" style="padding: 20px; margin:20px;" >
                                 <div class="header">
                                     <h4 class="title">Curte</h4>
                                 </div>

@@ -3,29 +3,25 @@ var app = angular.module('myApp', ['btford.socket-io'])
         return socketFactory();
     })
     .service('smartService',['$http', function ($http) {
+
         this.getForecast = function (apiKey,query, noOfDays, c) {
             $http.post('http://api.apixu.com/v1/forecast.json?key=' + apiKey + '&q=' + query + '&days=' + noOfDays).then(c);
         };
+
     }])
+
+.controller('loginController', function($scope) {
+        console.log('login');
+    })
+    .controller('registerController', function($scope) {
+        console.log('login');
+    })
 
 .controller('ArduController', function($scope, mySocket, $timeout, $http, smartService) {
 
 
-    //Led array
-    $scope.ledPins = [
-        { number: 0, led: 1, status: false, color: 'red', location: 'Bucatarie' },
-        { number: 1, led: 2, status: false, color: 'green', location: 'Living' }
-    ];
-
     var apiKey = '461eb1eda8b24280826233659170807';
-    $scope.hourArray = [];
-    $scope.valuesArray = [];
-
-    // For the time now
-    Date.prototype.timeNow = function() {
-        return ((this.getHours() < 10) ? "0" : "") + this.getHours() + ":" + ((this.getMinutes() < 10) ? "0" : "") + this.getMinutes() + ":" + ((this.getSeconds() < 10) ? "0" : "") + this.getSeconds();
-    };
-
+    $scope.outdoor = false;
 
 
     smartService.getForecast(apiKey, "cluj", 7, function (response) {
@@ -52,6 +48,12 @@ var app = angular.module('myApp', ['btford.socket-io'])
 
        return weekday[d.getDay()];
     }
+
+    //Led array
+    $scope.ledPins = [
+        { number: 0, led: 1, status: false, color: 'red', location: 'Bucatarie' },
+        { number: 1, led: 2, status: false, color: 'green', location: 'Living' }
+    ];
 
 
     //On page load , set motion divs status to false
@@ -88,8 +90,6 @@ var app = angular.module('myApp', ['btford.socket-io'])
         console.log('Led ' + p.number + ' is off');
     };
 
-    $scope.outdoor = false;
-
     $scope.OutdoorOn = function() {
         $scope.outdoor = true;
         mySocket.emit('outdoor:on', "on");
@@ -101,6 +101,12 @@ var app = angular.module('myApp', ['btford.socket-io'])
 
 
 
+    // For the time now
+    Date.prototype.timeNow = function() {
+        return ((this.getHours() < 10) ? "0" : "") + this.getHours() + ":" + ((this.getMinutes() < 10) ? "0" : "") + this.getMinutes() + ":" + ((this.getSeconds() < 10) ? "0" : "") + this.getSeconds();
+    };
+    $scope.hourArray = [];
+    $scope.valuesArray = [];
     mySocket.on('motionstart', function(data) {
         $scope.motion = true;
         var date = new Date(data);
@@ -128,7 +134,7 @@ var app = angular.module('myApp', ['btford.socket-io'])
     $scope.activateAlarm = function() {
         $scope.alarm = true;
         mySocket.emit('alarm', $scope.alarm);
-    };
+    }
 
     $scope.deactivateAlarm = function() {
         $scope.alarm = false;
@@ -138,7 +144,7 @@ var app = angular.module('myApp', ['btford.socket-io'])
 
     $scope.setAutoLights = function() {
 
-    };
+    }
 
     mySocket.on("userData", function(data) {
         console.log(data);
