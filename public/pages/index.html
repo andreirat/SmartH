@@ -231,21 +231,25 @@
                         </div>
                     </div>
                     <div id="security" class="tab-pane fade">
-
-                        <div class="panel panel-success">
-                            <div class="panel-heading">
-                                <h5>Status activitate</h5>
-                            </div>
-                            <div class="panel-body">
-                                <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12" ng-show="motion">
-                                    <p>Ultima miscare detectata:</p>
-                                    <!--<p class="motionstart"><i class="glyphicon glyphicon-eye-open"></i></p>-->
-                                    <input type="datetime" ng-model="motionstart" readonly>
+                        <div class="row">
+                            <div class="card  col-lg-3" style="padding: 20px; margin:20px;" >
+                                <div class="header">
+                                    <h4 class="title">Miscare detectata la ora</h4>
                                 </div>
-                                <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12" ng-show="nomotion">
-                                    <p>Nu a detectat miscare de la :</p>
-                                    <!--<p class="motionstart"><i class="glyphicon glyphicon-eye-close"></i></p>-->
-                                    <input type="datetime" ng-model="motionend" readonly>
+                                <div class="content">
+                                    <div style="margin-top: 20px;">
+                                        <p>{{ motionstart }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card  col-lg-3" style="padding: 20px; margin:20px;" >
+                                <div class="header">
+                                    <h4 class="title">Ultima miscare detectata</h4>
+                                </div>
+                                <div class="content">
+                                    <div style="margin-top: 20px;">
+                                        <p>{{ motionend }}</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
