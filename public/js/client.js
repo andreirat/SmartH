@@ -29,7 +29,7 @@ var app = angular.module('myApp', ['btford.socket-io'])
     smartService.getForecast(apiKey, "cluj", 7, function (response) {
         $scope.weather = response.data;
         $scope.current = response.data.current;
-        $cope.current.date = formatDate($scope.current.date);
+        $scope.current.date = formatDate($scope.current.date);
         $scope.currentLocation = response.data.location;
         $scope.forecastday = response.data.forecast.forecastday;
     });
