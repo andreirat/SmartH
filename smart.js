@@ -49,6 +49,12 @@ var piezo;
 errorHandler = function (){
     console.log('got some error')
 };
+success = function (data){
+    console.log(data)
+};
+var w = weather.forecastWeather("cluj", 7, errorHandler, success);
+
+console.log(w);
 // When board is ready ...
 board.on("ready", function() {
 
@@ -101,11 +107,7 @@ io.on('connection', function(socket) {
     });
 
 
-    weather.forecastWeather("cluj", 7, errorHandler, success);
-    success = function (data){
-        console.log(data)
-    };
-    console.log(w);
+
     socket.emit("weather", w);
 
     // Led ON action
