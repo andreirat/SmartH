@@ -102,7 +102,7 @@ io.on('connection', function(socket) {
         socket.emit('userData', docs);
     });
     success = function (data){
-        socket.emit("weather", localweather);
+        socket.emit("weather", data);
     };
     weather.forecastWeather("cluj", 7, errorHandler, success);
 
