@@ -121,7 +121,7 @@ io.on('connection', function(socket) {
         leds[4].on();
     });
 
-    socket.on('alarm', function(data) {
+    socket.on('alarm:on', function(data) {
         if (data) {
             motion.on("motionstart", function() {
                 var date = new Date();
@@ -131,6 +131,12 @@ io.on('connection', function(socket) {
                 leds[2].blink(300);
                 sendSMS(time);
             });
+        }
+    });
+    socket.on('alarm:off', function(data) {
+        if (!data) {
+            console.log(data);
+            leds[2].blink(300);
         }
     });
 
