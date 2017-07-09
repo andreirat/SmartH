@@ -12,7 +12,6 @@ var app = angular.module('myApp', ['btford.socket-io'])
 
 
     var apiKey = '461eb1eda8b24280826233659170807';
-    $scope.outdoor = false;
     $scope.hourArray = [];
     $scope.valuesArray = [];
 
@@ -88,6 +87,8 @@ var app = angular.module('myApp', ['btford.socket-io'])
         mySocket.emit('led:off', p);
         console.log('Led ' + p.number + ' is off');
     };
+
+    $scope.outdoor = false;
 
     $scope.OutdoorOn = function() {
         $scope.outdoor = true;
