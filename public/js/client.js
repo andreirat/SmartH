@@ -32,6 +32,9 @@ var app = angular.module('myApp', ['btford.socket-io'])
         $scope.current.date = formatDate($scope.current.date);
         $scope.currentLocation = response.data.location;
         $scope.forecastday = response.data.forecast.forecastday;
+        angular.forEach($scope.forecastday, function (d) {
+            d.date = formatDate(d.date);
+        })
     });
 
     function formatDate(date){

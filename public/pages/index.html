@@ -118,7 +118,7 @@
                                 <div class="forecast-container">
                                     <div class="today forecast">
                                         <div class="forecast-header">
-                                            <div class="day">Monday</div>
+                                            <div class="day">Acum</div>
                                             <div class="date">{{ current.date }}</div>
                                         </div> <!-- .forecast-header -->
                                         <div class="forecast-content">
@@ -140,7 +140,7 @@
                                         </div> <!-- .forecast-header -->
                                         <div class="forecast-content">
                                             <div class="forecast-icon">
-                                                <img src="{{ day.condition.icon }}" alt="" width=48>
+                                                <img src="{{ day.day.condition.icon }}" alt="" width=48>
                                             </div>
                                             <div class="degree">{{ day.day.maxtemp_c }}<sup>o</sup>C</div>
                                             <small>{{ day.day.mintemp_c }}<sup>o</sup></small>
