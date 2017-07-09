@@ -13,7 +13,6 @@ var database;
 var mongo = require('mongodb');
 var monk = require('monk');
 var db = monk('localhost:27017/smarth');
-var weather = require('./weatherlib');
 
 
 // var oled = require('oled-js-pi');
@@ -45,11 +44,6 @@ Date.prototype.timeNow = function() {
 var leds = {};
 var motion = {};
 var piezo;
-var localweather;
-errorHandler = function (){
-    console.log('got some error')
-};
-
 
 // When board is ready ...
 board.on("ready", function() {
@@ -69,11 +63,6 @@ board.on("ready", function() {
         tempo: 100
     });
 
-
-    success = function (data){
-        io.emit("weather", data);
-    };
-    weather.forecastWeather("cluj", 7, errorHandler, success);
 
     // "calibrated" occurs once, at the beginning of a session,
     motion.on("calibrated", function(data) {

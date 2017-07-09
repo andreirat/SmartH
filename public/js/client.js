@@ -17,6 +17,38 @@ var app = angular.module('myApp', ['btford.socket-io'])
         { number: 1, led: 2, status: false, color: 'green', location: 'Living' }
     ];
 
+    var apiKey = '461eb1eda8b24280826233659170807';
+
+    var options = {
+        host: 'api.apixu.com',
+        port: 80,
+        path: '/v1/current.json?key=' + apiKey + '&q=',
+        method: 'GET'
+    };
+
+    function forecastWeather(query, noOfDays, callback, success){
+        options.path = '/v1/forecast.json?key=' + apiKey + '&q=' + query + '&days=' + noOfDays;
+        http.request(options, function(res) {
+            res.setEncoding('utf8');
+            res.on('data', function (chunk) {
+               console.log(chunk);
+            });
+            res.on('end', function (chunk) {
+            });
+        }).on('error', function(err) {
+            // handle errors with the request itself
+            console.error('Error with the request:', err.message);
+            callback(err);
+        }).end();
+    }
+
+    function success(data){
+        console.log(data+"aici");
+    }
+    forecastWeather("cluj",7, error, success);
+
+
+
 
     $scope.lcdtext = '';
     //On page load , set motion divs status to false
