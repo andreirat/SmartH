@@ -2,6 +2,13 @@ var app = angular.module('myApp', ['btford.socket-io'])
     .factory('mySocket', function(socketFactory) {
         return socketFactory();
     })
+    .service('smartService',['$http', function ($http) {
+
+        this.getForecast = function (apiKey,query, noOfDays, c) {
+            $http.post('http://api.apixu.com/v1/forecast.json?key=' + apiKey + '&q=' + query + '&days=' + noOfDays).then(c);
+        };
+
+    }])
 
 .controller('loginController', function($scope) {
         console.log('login');
@@ -10,7 +17,7 @@ var app = angular.module('myApp', ['btford.socket-io'])
         console.log('login');
     })
 
-.controller('ArduController', function($scope, mySocket, $timeout, $http) {
+.controller('ArduController', function($scope, mySocket, $timeout, $http, smartService) {
     //Led array
     $scope.ledPins = [
         { number: 0, led: 1, status: false, color: 'red', location: 'Bucatarie' },
@@ -19,25 +26,9 @@ var app = angular.module('myApp', ['btford.socket-io'])
 
     var apiKey = '461eb1eda8b24280826233659170807';
 
-    var options = {
-        port: 80,
-        method: 'GET'
-    };
-
-    function forecastWeather(query, noOfDays, callback, success){
-        options.path = '/v1/forecast.json?key=' + apiKey + '&q=' + query + '&days=' + noOfDays;
-        $http.jsonp('http://api.apixu.com/v1/forecast.json?key=' + apiKey + '&q=' + query + '&days=' + noOfDays, options).then(success, error());
-
-    }
-
-
-    function success(data){
-        console.log(data+"aici");
-    }
-    function error(data){
-        console.log(data+"121");
-    }
-    forecastWeather("cluj",7, error, success);
+    smartService.getForecast(apiKey, "cluj", 7, function (response) {
+        console.log(response);
+    });
 
 
 
