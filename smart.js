@@ -1,3 +1,6 @@
+/**
+ * Initializare variabile si constante
+ */
 const config = require('./config');
 var express = require('express');
 var app = express();
@@ -6,22 +9,22 @@ var httpServer = require("http").createServer(app);
 var five = require("johnny-five");
 var Raspi = require("raspi-io");
 var io = require('socket.io')(httpServer);
-// var monk = require('monk');
-// var db = monk('localhost:27017/smarth');
 var database;
-// Retrieve
 var mongo = require('mongodb');
 var monk = require('monk');
 var db = monk('localhost:27017/smarth');
-
-
-// var oled = require('oled-js-pi');
-// var font = require('oled-font-5x7');
 var board = new five.Board({
     io: new Raspi()
 });
 var port = 3000;
+
+/**
+ * Utilizarea fisierelor statice
+ */
 app.use(express.static(__dirname + '/public'));
+/**
+ * Utilizarea fisierului index.html ca si fisier principal
+ */
 app.get('/', function(req, res) {
     res.sendFile(__dirname + '/public/pages/index.html');
 });
@@ -29,48 +32,57 @@ httpServer.listen(port);
 console.log('Hello Rat ! Server is runing on port ' + port);
 
 
-// For todays date;
+/**
+ * Functie formatare data
+ * Returneaza data
+ * @returns {string}
+ */
 Date.prototype.today = function() {
     return ((this.getDate() < 10) ? "0" : "") + this.getDate() + "/" + (((this.getMonth() + 1) < 10) ? "0" : "") + (this.getMonth() + 1) + "/" + this.getFullYear();
-}
+};
 
-// For the time now
+/**
+ * Functie formatare data
+ * Returneaza ora
+ * @returns {string}
+ */
 Date.prototype.timeNow = function() {
     return ((this.getHours() < 10) ? "0" : "") + this.getHours() + ":" + ((this.getMinutes() < 10) ? "0" : "") + this.getMinutes() + ":" + ((this.getSeconds() < 10) ? "0" : "") + this.getSeconds();
 }
 
 
-// Variable init
+/**
+ * Initializare variabile senzori si componente
+ * @type {{}}
+ */
 var leds = {};
 var motion = {};
 var piezo;
 
-// When board is ready ...
+/**
+ * Cand placa este initializata
+ */
 board.on("ready", function() {
 
-
+    /**
+     * Atribuire pini pentru senzori si componente
+     * @type {five.Piezo}
+     */
     piezo = new five.Piezo("GPIO18");
     leds = new five.Leds(["P1-13", "P1-15", "P1-11", "GPIO20", "GPIO21"]);
     motion = new five.Motion("GPIO23");
 
-    // Plays the same song with a string representation
-    piezo.play({
-        // song is composed by a string of notes
-        // a default beat is set, and the default octave is used
-        // any invalid note is read as "no note"
-        song: "C D F D A - A A A A G G G G - - C D F D G - G G G G F F F F - -",
-        beats: 1 / 4,
-        tempo: 100
-    });
 
-
-    // "calibrated" occurs once, at the beginning of a session,
+    /**
+     * Cand PIR este calibrat
+     */
     motion.on("calibrated", function(data) {
         console.log("Motion sensor calibrated.");
     });
 
-    // "motionstart" events are fired when the "calibrated"
-    // proximal area is disrupted, generally by some form of movement
+    /**
+     * Cand PIR detecteaza miscare
+     */
     motion.on("motionstart", function() {
         var date = new Date();
         io.emit('motionstart', date);
@@ -79,8 +91,9 @@ board.on("ready", function() {
         // sendSMS(time);
     });
 
-    // "motionend" events are fired following a "motionstart" event
-    // when no movement has occurred in X ms
+    /**
+     * Cand PIR nu mai detecteaza miscare
+     */
     motion.on("motionend", function() {
         var date = new Date;
         io.emit('motionend', date);
@@ -89,6 +102,9 @@ board.on("ready", function() {
 
 });
 
+/**
+ * Cand se conecteaza Socket.io
+ */
 io.on('connection', function(socket) {
     console.log('Started');
 
@@ -97,42 +113,51 @@ io.on('connection', function(socket) {
         socket.emit('userData', docs);
     });
 
-    // Led ON action
+    // Primire comanda aprindere LED
     socket.on('led:on', function(data) {
         console.log(data.number);
         leds[data.number].on();
         console.log('Led ' + data.number + ' on');
     });
 
-    // Led OFF action
+    // Primire comanda stingere LED
     socket.on('led:off', function(data) {
         leds[data.number].off();
         console.log('Led ' + data.number + ' off');
 
     });
-    // Led OFF action
+    // Comanda stingere LED-uri exterioare
     socket.on('outdoor:off', function(data) {
         leds[3].off();
         leds[4].off();
     });
-    // Led OFF action
+    // Comanda aprindere LED-uri exterioare
     socket.on('outdoor:on', function(data) {
         leds[3].on();
         leds[4].on();
     });
 
+    // Comanda pornire alarma
     socket.on('alarm:on', function(data) {
         if (data) {
             motion.on("motionstart", function() {
                 var date = new Date();
                 io.emit('motionstart', date);
-                console.log("motionstart here");
+                // Porneste piezo
+                piezo.play({
+                    song: "C D F D A - A A A A G G G G - - C D F D G - G G G G F F F F - -",
+                    beats: 1 / 4,
+                    tempo: 100
+                });
+
                 var time = date.today() + " @ " + date.timeNow();
-                leds[2].blink(300);
-                sendSMS(time);
+                leds[2].blink(300); // Aprinde bed alarma
+                sendSMS(time); // Trimite SMS
             });
         }
     });
+
+    // Comanda oprire alarma
     socket.on('alarm:off', function(data) {
         if (!data) {
             console.log(data);
@@ -142,13 +167,19 @@ io.on('connection', function(socket) {
 
 });
 
-// SMS function 
+/**
+ * Initializare constante serviciu Nexmo
+ */
 const Nexmo = require('nexmo');
 const nexmo = new Nexmo({
     apiKey: config.nexmo.api_key,
     apiSecret: config.nexmo.api_secret
 });
 
+/**
+ * Functie trimitere SMS
+ * @param time
+ */
 function sendSMS(time) {
     var msg = 'Alerta miscare!';
     nexmo.message.sendSms(config.nexmo.fromNumber, config.nexmo.toNumber, msg, {type: 'unicode'}, function (response) {

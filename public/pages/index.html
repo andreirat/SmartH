@@ -28,6 +28,7 @@
     <script src="../lib/socket.io-client/socket.io.js"></script>
     <script src="../lib/angularjs/angular.js"></script>
     <script src="../lib/angular-socket-io/socket.js"></script>
+    <script src="../js/forecastService.js"></script>
     <script src="../js/client.js"></script>
 </head>
 
@@ -188,6 +189,7 @@
                                                         <td>Activare alarma la <input type="datetime-local" name="bdaytime" ng-model="dataalarma"></td>
                                                     </tr>
                                                 </tbody>
+
                                             </table>
                                         </div>
                                     </div>
@@ -256,8 +258,25 @@
                             <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
                         </div>
                     </div>
-                    <div id="energy" class="tab-pane fade">
-                        <div class="row">
+                    <div id="energy" class="tab-pane">
+                        <div class="">
+                            <div class="card  " style="padding: 20px; margin:20px;" >
+                                <div class="header">
+                                    <h4 class="title">Setari instalatie solara</h4>
+                                </div>
+                                <div class="content" style="display: flex;">
+                                        <span style="width: 33%; margin-top: 16px;">Puterea totala (W)<input style="margin-left: 10px;" type="text" ng-model="pv.power" placeholder="ex. 400W"></span>
+                                        <span style="width: 33%">Inclinatia: {{ pv.degrees }} (grade)<input type="range" min="0" max="90" ng-model="pv.degrees" ></span>
+                                        <span style="width: 33%; margin-left: 30px;">Unghi de azimut: {{ pv.azimut }} grade<input type="range" min="-180" max="180" ng-model="pv.azimut"></span>
+                                </div>
+                                <button type="button" ng-click="getPV(pv);">Calculeaza</button>
+                            </div>
+                        </div>
+                        <div style="margin-bottom: 10px;" ng-show="pvload">
+                            <button type="button" class="butonzile" ng-click="switchDay($index)" ng-repeat="day in arraysDays">{{ day }}</button>
+                        </div>
+
+                        <div class="" ng-show="pvload">
                             <div id="container2" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
                         </div>
                     </div>

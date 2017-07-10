@@ -16,6 +16,17 @@ margin:0 auto;
 width:1000px;
 }
 
+.butonzile{
+	padding: 10px;
+	width: 100px;
+	border: none;
+	outline: none;
+	background-color: #8564ca;
+	border-radius: 5px;
+	color: #fff;
+	margin: 10px;
+}
+
 .colorchange .org img{
  background:#ff8a00;          
 }
