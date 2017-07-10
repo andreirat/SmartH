@@ -310,7 +310,7 @@ var app = angular.module('myApp', ['btford.socket-io'])
                 }
             },
             title: {
-                text: 'Power management  '
+                text: 'Managementul energiei'
             },
             legend: {
                 layout: 'vertical',
@@ -341,7 +341,7 @@ var app = angular.module('myApp', ['btford.socket-io'])
                 showInNavigator: true
             },
             series: [{
-                name : "Generated",
+                name : "Generat",
                 color: '#fdfe02'
             }]
         };
