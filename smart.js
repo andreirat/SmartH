@@ -48,7 +48,7 @@ Date.prototype.today = function() {
  */
 Date.prototype.timeNow = function() {
     return ((this.getHours() < 10) ? "0" : "") + this.getHours() + ":" + ((this.getMinutes() < 10) ? "0" : "") + this.getMinutes() + ":" + ((this.getSeconds() < 10) ? "0" : "") + this.getSeconds();
-}
+};
 
 
 /**
@@ -58,6 +58,7 @@ Date.prototype.timeNow = function() {
 var leds = {};
 var motion = {};
 var piezo;
+var alarm = false;
 
 /**
  * Cand placa este initializata
@@ -100,6 +101,16 @@ board.on("ready", function() {
         console.log("motionend");
     });
 
+
+    if(alarm){
+        leds[2].blink(300);
+        piezo.play({
+            song: "C D F D A - A A A A G G G G - - C D F D G - G G G G F F F F - -",
+            beats: 1 / 4,
+            tempo: 100
+        });
+    }
+
 });
 
 /**
@@ -140,19 +151,12 @@ io.on('connection', function(socket) {
     // Comanda pornire alarma
     socket.on('alarm:on', function(data) {
         if (data) {
+            alarm = true;
             motion.on("motionstart", function() {
                 var date = new Date();
                 io.emit('motionstart', date);
-                // Porneste piezo
-                piezo.play({
-                    song: "C D F D A - A A A A G G G G - - C D F D G - G G G G F F F F - -",
-                    beats: 1 / 4,
-                    tempo: 100
-                });
-
                 var time = date.today() + " @ " + date.timeNow();
-                leds[2].blink(300); // Aprinde bed alarma
-                sendSMS(time); // Trimite SMS
+                // sendSMS(time); // Trimite SMS
             });
         }
     });
@@ -160,12 +164,12 @@ io.on('connection', function(socket) {
     // Comanda oprire alarma
     socket.on('alarm:off', function(data) {
         if (!data) {
-            console.log(data);
-            leds[2].stop().off();
+           alarm = false;
         }
     });
 
 });
+
 
 /**
  * Initializare constante serviciu Nexmo
