@@ -264,7 +264,7 @@ var app = angular.module('myApp', ['btford.socket-io'])
 
         $scope.setTimeLights = function () {
             $scope.outdoor = true;
-            mySocket.emit('outdoor:on', $scope.datalumini);
+            mySocket.emit('outdoor:prog', $scope.datalumini);
         };
 
         $scope.setTimeAlarm = function () {
@@ -273,7 +273,7 @@ var app = angular.module('myApp', ['btford.socket-io'])
             var difference = (b - a);
             $timeout(function () {
                 $scope.alarm = true;
-                mySocket.emit('alarm:prog', $scope.alarm);
+                mySocket.emit('alarm:on', $scope.alarm);
             },difference)
         };
 
