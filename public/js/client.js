@@ -274,8 +274,13 @@ var app = angular.module('myApp', ['btford.socket-io'])
         };
 
         $scope.setTimeAlarm = function () {
-            console.log($scope.dataalarma)
-
+            var a = new Date();
+            var b = new Date($scope.dataalarma);
+            var difference = (b - a);
+            $timeout(function () {
+                $scope.alarm = true;
+                mySocket.emit('alarm:on', $scope.alarm);
+            },difference)
         };
 
         mySocket.on("userData", function (data) {
