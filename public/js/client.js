@@ -273,7 +273,7 @@ var app = angular.module('myApp', ['btford.socket-io'])
             var difference = (b - a);
             $timeout(function () {
                 $scope.alarm = true;
-                mySocket.emit('alarm:on', $scope.alarm);
+                mySocket.emit('alarm:prog', $scope.alarm);
             },difference)
         };
 
