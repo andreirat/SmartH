@@ -57,18 +57,12 @@ Date.prototype.timeNow = function() {
  */
 var leds = {};
 var motion = {};
-var piezo;
 
 /**
  * Cand placa este initializata
  */
 board.on("ready", function() {
 
-    /**
-     * Atribuire pini pentru senzori si componente
-     * @type {five.Piezo}
-     */
-    piezo = new five.Piezo("GPIO18");
     leds = new five.Leds(["P1-13", "P1-15", "P1-11", "GPIO20", "GPIO21"]);
     motion = new five.Motion("GPIO23");
 
@@ -87,8 +81,6 @@ board.on("ready", function() {
         var date = new Date();
         io.emit('motionstart', date);
         console.log("motionstart");
-        var time = date.today() + " @ " + date.timeNow();
-        // sendSMS(time);
     });
 
     /**
@@ -135,6 +127,19 @@ io.on('connection', function(socket) {
     socket.on('outdoor:on', function(data) {
         leds[3].on();
         leds[4].on();
+    });
+    // Comanda aprindere LED-uri exterioare
+    socket.on('outdoor:prog', function(data) {
+        console.log(data);
+        var a = new Date();
+        var b = new Date(data);
+        var difference = (b - a);
+        console.log(difference);
+        setTimeout(function () {
+            leds[3].on();
+            leds[4].on();
+        }, difference)
+
     });
     var alarm = false;
 
