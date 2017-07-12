@@ -23,7 +23,7 @@ var app = angular.module('myApp', ['btford.socket-io'])
     /**
      * Controller
      */
-    .controller('ArduController', function ($scope, mySocket, $timeout, $http, smartService) {
+    .controller('ArduController', function ($scope, mySocket, $timeout, $http, smartService, $interval) {
         var pvApi = 'aEJ4Q8DFzWQ0XrtdXDzM2nctiDjIr1sJ';
         $scope.pvload = false;
         var powerArray = [];
@@ -263,14 +263,20 @@ var app = angular.module('myApp', ['btford.socket-io'])
 
 
         $scope.setTimeLights = function () {
-            console.log($scope.datalumini)
+            var a = new Date();
+            var b = new Date($scope.datalumini);
+            var difference = (b - a);
+            $timeout(function () {
+                $scope.outdoor = true;
+                mySocket.emit('outdoor:on', "on");
+            },difference)
 
-        }
+        };
 
         $scope.setTimeAlarm = function () {
             console.log($scope.dataalarma)
 
-        }
+        };
 
         mySocket.on("userData", function (data) {
             console.log(data);
