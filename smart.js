@@ -136,22 +136,19 @@ io.on('connection', function(socket) {
         leds[3].on();
         leds[4].on();
     });
+    var alarm = false;
 
     // Comanda pornire alarma
     socket.on('alarm:on', function(data) {
         if (data) {
+            alarm = true;
             motion.on("motionstart", function() {
                 var date = new Date();
                 io.emit('motionstart', date);
-                // Porneste piezo
-                piezo.play({
-                    song: "C D F D A - A A A A G G G G - - C D F D G - G G G G F F F F - -",
-                    beats: 1 / 4,
-                    tempo: 100
-                });
-
                 var time = date.today() + " @ " + date.timeNow();
-                leds[2].blink(300); // Aprinde bed alarma
+                if(alarm){
+                    leds[2].blink(300); // Aprinde bed alarma
+                }
                 sendSMS(time); // Trimite SMS
             });
         }
@@ -160,6 +157,7 @@ io.on('connection', function(socket) {
     // Comanda oprire alarma
     socket.on('alarm:off', function(data) {
         if (!data) {
+            alarm = false;
             console.log(data);
             piezo.off();
             leds[2].stop().off();
