@@ -128,19 +128,7 @@ io.on('connection', function(socket) {
         leds[3].on();
         leds[4].on();
     });
-    // Comanda aprindere LED-uri exterioare
-    socket.on('outdoor:prog', function(data) {
-        console.log(data);
-        var a = new Date();
-        var b = new Date(data);
-        var difference = (b - a);
-        console.log(difference);
-        setTimeout(function () {
-            leds[3].on();
-            leds[4].on();
-        }, difference)
 
-    });
     var alarm = false;
 
     // Comanda pornire alarma
