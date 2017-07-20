@@ -1,6 +1,5 @@
 # SmartH
 
-[![N|Solid](https://cldup.com/dTxpPi9lDf.thumb.png)](https://nodesource.com/products/nsolid)
 
 SmartH is an web application which works with Raspberry Pi 3. This app contains an NodeJs server which runs only on Raspberry Pi. The main scope of this project is to let users controll home appliances easly, to monitor different sensors and to offer to users confort and a way to make things more efficient. 
 
