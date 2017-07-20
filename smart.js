@@ -152,7 +152,6 @@ io.on('connection', function(socket) {
         if (!data) {
             alarm = false;
             console.log(data);
-            piezo.off();
             leds[2].stop().off();
         }
     });

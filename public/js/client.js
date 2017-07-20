@@ -263,24 +263,18 @@ var app = angular.module('myApp', ['btford.socket-io'])
 
 
         $scope.setTimeLights = function () {
-            var a = new Date();
-            var b = new Date($scope.datalumini);
-            var difference = (b - a);
             $timeout(function () {
                 $scope.outdoor = true;
                 mySocket.emit('outdoor:on', $scope.datalumini);
-            },difference)
+            },$scope.datalumini*60000)
 
         };
 
         $scope.setTimeAlarm = function () {
-            var a = new Date();
-            var b = new Date($scope.dataalarma);
-            var difference = (b - a);
             $timeout(function () {
                 $scope.alarm = true;
                 mySocket.emit('alarm:on', $scope.alarm);
-            },difference)
+            },$scope.dataalarma*60000)
         };
 
         mySocket.on("userData", function (data) {
