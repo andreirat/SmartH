@@ -5,7 +5,7 @@
     "main": "server.js",
     "dependencies": {
         "express": "*",
-        "mongodb": "^2.2.28",
+        "mongodb": "^3.6.1",
         "nexmo": "^2.0.2",
         "oled-font-5x7": "^1.0.0",
         "oled-js": "^4.0.2",
